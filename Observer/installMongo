@@ -1,0 +1,40 @@
+to install mongoDB community, follow this link and follow the steps.
+
+	https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
+
+To install pymongo, run(requires pip3):
+
+	sudo pip3 install pymongo
+
+After installing pymongo, to confirm it is installed run:
+	
+	python3
+	import pymongo
+
+If no error occurs pymongo is installed correctly.
+
+Running the mongoDB is run with the command "mongod".
+If issues persist, follow steps on this page: 
+https://stackoverflow.com/questions/7948789/mongodb-mongod-complains-that-there-is-no-data-db-folder
+
+To set up on my system, I used:
+    sudo mkdir -p /data/db
+
+And because following the steps on there didn't work for me I used(bad on me):
+    sudo chmod 0777 /data/db
+    
+After that when I ran "mongod" mongoDB would start and run and wait for connections as normal.
+
+Here are links for ways to add items to a collection, sort/find, recall a collection, and the pymongo tutorial:
+Add a dict:
+    https://stackoverflow.com/questions/8354610/pymongo-add-field-containing-a-dict
+
+sort/find:
+    https://stackoverflow.com/questions/10079107/pymongo-sort-and-find-one-issue
+    
+recall a collection:
+    https://stackoverflow.com/questions/9822575/how-to-check-in-pymongo-if-collection-exists-and-if-exists-empty-remove-all-fro
+
+Pymongo tutorial:
+    http://api.mongodb.com/python/current/tutorial.html
+

@@ -1,0 +1,63 @@
+import sys, time, socket
+#from socket import *
+
+
+PORT = None
+NODE_SEND = None
+
+BROADCAST = '255.255.255.000'
+
+IP = socket.gethostbyname( socket.gethostname() )
+
+
+def Hostname():
+	return socket.gethostname()
+
+class Node:
+    
+    def __init__(self, port):
+        PORT = port
+ 
+	try:	
+            self.node = socket(socket.AF_INET, socket.SOCK_DGRAM)
+        #	print 'Socket create ok'	
+        except socket.error, msg:
+            print 'Socket create failed. Error code: ' + str(msg[0]) + ' Message: ' + msg[1]
+        #	sys.exit()
+        try:	
+            self.node.bind(('', 0))
+        #	print 'Socket bind ok'
+
+        except socket.error, msg:	
+        #	print 'Socket bind failed. Error code: ' + str(msg[0]) + ' Message: ' + msg[1]
+            sys.exit()
+        
+	self.node.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
+        self.node.setsockopt(SOL_SOCKET, SO_BROADCAST, 1)	
+        self.node.setblocking(0);
+
+        
+	#	print 'Node broadcast mode ready'j	
+	self.node.bind( (IP, PORT))	
+	
+	#set up connecting side. 
+	#For initial broadcast	
+	NODE_SEND = socket(AF_INET, SOCK_GRAM)
+		
+		
+    def node_send( message):
+
+        #ignore error checks 	
+        NODE_SEND.sendto(message, ('<broadcast>', PORT))
+
+    def node_recv(self):
+	
+	
+        msg, addr = self.recv(PORT)
+        print 'Broadcast message: '+  msg 
+
+    def node_close(self):
+	self.sock.close()
+	NODE_SEND.sock.close()
+
+
